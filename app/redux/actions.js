@@ -6,6 +6,7 @@ export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
 export const SET_USER = "SET_USER";
 export const CLEAR_USER = "CLEAR_USER";
+export const SET_THEME = "SET_THEME";
 
 export const fetchProductsRequest = () => ({
   type: FETCH_PRODUCTS_REQUEST,
@@ -42,4 +43,9 @@ export const setUser = (user) => ({
 
 export const clearUser = () => ({
   type: CLEAR_USER,
+});
+
+export const setTheme = (theme) => ({
+  type: SET_THEME,
+  payload: theme,
 });

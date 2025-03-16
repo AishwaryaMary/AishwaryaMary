@@ -18,6 +18,7 @@ import {
   fetchCategoriesSuccess,
   fetchCategoriesFailure,
   clearUser,
+  setTheme,
 } from "../redux/actions";
 
 import api from "../utils/api";
@@ -34,12 +35,13 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { products, loading, error, categories, user } = useSelector(
+  const { products, loading, error, categories, user, theme } = useSelector(
     (state) => state
   );
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [cyderesMode, setCyderesMode] = useState(theme === "dark");
 
   useEffect(() => {
     const fetchProductsAndCategories = async () => {
@@ -102,6 +104,14 @@ const HomeScreen = () => {
     }
   };
 
+  const handleToggleTheme = () => {
+    const newTheme = cyderesMode ? "light" : "dark";
+    setCyderesMode(!cyderesMode);
+    dispatch(setTheme(newTheme));
+  };
+
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -147,6 +157,7 @@ const HomeScreen = () => {
               onPress={() =>
                 setSelectedCategory(item === selectedCategory ? null : item)
               }
+              theme={theme}
             />
           )}
         />
@@ -171,6 +182,7 @@ const HomeScreen = () => {
                 })
               }
               style={styles.productItem}
+              theme={theme}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -186,79 +198,103 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 60,
-    backgroundColor: "#F5EFE7",
-    paddingHorizontal: 16,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingBottom: 16,
-  },
-  userText: {
-    fontSize: 16,
-    color: "#8B5E3C",
-    fontWeight: "500",
-  },
-  logoutButton: {
-    backgroundColor: "#D2B48C",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-  },
-  logoutText: {
-    color: "#8B5E3C",
-    fontWeight: "600",
-  },
-  loginButton: {
-    backgroundColor: "#D2B48C",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-  },
-  loginText: {
-    color: "#8B5E3C",
-    fontWeight: "600",
-  },
-  searchBar: {
-    height: 40,
-    borderColor: "#D2B48C",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 12,
-    backgroundColor: "#FFFFFF",
-  },
-  errorText: {
-    color: "red",
-    textAlign: "center",
-  },
-  categoryContainer: {
-    paddingVertical: 4,
-    marginBottom: 8,
-  },
-  productList: {
-    paddingVertical: 12,
-    gap: 12,
-  },
-  columnWrapper: {
-    justifyContent: "space-between",
-    gap: 12,
-  },
-  productItem: {
-    flex: 1,
-    maxWidth: "48%",
-  },
-  noResultsText: {
-    marginTop: 20,
-    textAlign: "center",
-    fontSize: 16,
-    color: "#8B5E3C",
-  },
-});
+const getStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingTop: 60,
+      backgroundColor: theme === "dark" ? "#121212" : "#F5EFE7",
+      paddingHorizontal: 16,
+      borderColor: theme === "dark" ? "red" : "transparent",
+      borderWidth: theme === "dark" ? 2 : 0,
+    },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingBottom: 16,
+      borderWidth: theme === "dark" ? 2 : 0,
+    },
+    userText: {
+      fontSize: 16,
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      fontWeight: "500",
+    },
+    logoutButton: {
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 16,
+      borderColor: theme === "dark" ? "red" : "transparent",
+      borderWidth: theme === "dark" ? 1 : 0,
+    },
+    logoutText: {
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      fontWeight: "600",
+    },
+    loginButton: {
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      borderRadius: 16,
+      borderColor: theme === "dark" ? "red" : "transparent",
+      borderWidth: theme === "dark" ? 1 : 0,
+    },
+    loginText: {
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      fontWeight: "600",
+    },
+    searchBar: {
+      height: 40,
+      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderWidth: 1,
+      borderRadius: 8,
+      paddingHorizontal: 10,
+      marginBottom: 12,
+      backgroundColor: "#FFFFFF",
+    },
+    errorText: {
+      color: "red",
+      textAlign: "center",
+    },
+    categoryContainer: {
+      paddingVertical: 4,
+      marginBottom: 8,
+    },
+    productList: {
+      paddingVertical: 12,
+      gap: 12,
+    },
+    columnWrapper: {
+      justifyContent: "space-between",
+      gap: 12,
+    },
+    productItem: {
+      flex: 1,
+      maxWidth: "48%",
+      borderColor: theme === "dark" ? "red" : "transparent",
+      borderWidth: theme === "dark" ? 1 : 0,
+    },
+    noResultsText: {
+      marginTop: 20,
+      textAlign: "center",
+      fontSize: 16,
+      color: "#8B5E3C",
+    },
+    toggleButton: {
+      alignSelf: "center",
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      borderRadius: 8,
+      marginBottom: 12,
+      borderColor: theme === "dark" ? "red" : "transparent",
+      borderWidth: theme === "dark" ? 1 : 0,
+    },
+    toggleButtonText: {
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      fontWeight: "600",
+    },
+  });
 
 export default HomeScreen;

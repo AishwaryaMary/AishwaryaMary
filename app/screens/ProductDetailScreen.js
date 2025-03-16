@@ -12,13 +12,12 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import ProductCarousel from "../components/ProductCarousel";
 import { formatPrice } from "../utils/formatPrice";
-import api from "../utils/api";
 
 const ProductDetailScreen = () => {
   const params = useLocalSearchParams();
   const router = useRouter();
 
-  const { products } = useSelector((state) => state);
+  const { products, theme } = useSelector((state) => state);
 
   const product = {
     id: params.id,
@@ -41,6 +40,8 @@ const ProductDetailScreen = () => {
       setRelatedProducts(filteredProducts);
     }
   }, [products, product.category, product.id]);
+
+  const styles = getStyles(theme);
 
   return (
     <ScrollView style={styles.container}>
@@ -109,117 +110,124 @@ const ProductDetailScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5EFE7",
-    paddingTop: "15%",
-  },
-  backButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 16,
-    marginLeft: 16,
-    borderRadius: 8,
-    backgroundColor: "#D2B48C",
-    alignSelf: "flex-start",
-    marginBottom: 20,
-  },
-  backText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  carouselContainer: {
-    marginBottom: 20,
-    borderRadius: 12,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-    paddingHorizontal: "3%",
-  },
-  detailsContainer: {
-    padding: 16,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-    marginHorizontal: 16,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#8B5E3C",
-    marginBottom: 8,
-    width: "80%",
-  },
-  price: {
-    fontSize: 20,
-    color: "#800000",
-    marginBottom: 12,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  description: {
-    fontSize: 16,
-    color: "#6E4B27",
-    lineHeight: 24,
-  },
-  heading: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  relatedProductsContainer: {
-    marginTop: 5,
-    paddingLeft: 16,
-  },
-
-  relatedTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#8B5E3C",
-    marginBottom: 12,
-  },
-  relatedItem: {
-    width: 150,
-    marginRight: 10,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    padding: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  relatedImage: {
-    width: "100%",
-    height: 100,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  relatedText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#8B5E3C",
-    height: 40,
-  },
-  relatedPrice: {
-    fontSize: 14,
-    color: "#800000",
-    fontWeight: "bold",
-  },
-  productInfoContainer: {
-    height: 600,
-  },
-});
+const getStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme === "dark" ? "#121212" : "#F5EFE7",
+      paddingTop: "15%",
+    },
+    backButton: {
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      marginTop: 16,
+      marginLeft: 16,
+      borderRadius: 8,
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
+      alignSelf: "flex-start",
+      marginBottom: 20,
+      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderWidth: 1,
+    },
+    backText: {
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+    carouselContainer: {
+      marginBottom: 20,
+      borderRadius: 12,
+      overflow: "hidden",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 5,
+      paddingHorizontal: "3%",
+      backgroundColor: theme === "dark" ? "none" : "#FFFFFF",
+    },
+    detailsContainer: {
+      padding: 16,
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      borderRadius: 12,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 5,
+      marginHorizontal: 16,
+      marginBottom: 20,
+      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderWidth: 1,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: "600",
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      marginBottom: 8,
+      width: "80%",
+    },
+    price: {
+      fontSize: 20,
+      color: theme === "dark" ? "#FF6347" : "#800000", // Tomato color for dark mode
+      marginBottom: 12,
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    description: {
+      fontSize: 16,
+      color: theme === "dark" ? "#DDDDDD" : "#6E4B27",
+      lineHeight: 24,
+    },
+    heading: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    relatedProductsContainer: {
+      marginTop: 10,
+      paddingLeft: 16,
+    },
+    relatedTitle: {
+      fontSize: 20,
+      fontWeight: "bold",
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      marginBottom: 12,
+    },
+    relatedItem: {
+      width: 150,
+      marginRight: 10,
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      borderRadius: 8,
+      padding: 8,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderWidth: 1,
+    },
+    relatedImage: {
+      width: "100%",
+      height: 100,
+      borderRadius: 8,
+      marginBottom: 8,
+    },
+    relatedText: {
+      fontSize: 14,
+      fontWeight: "500",
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      height: 40,
+    },
+    relatedPrice: {
+      fontSize: 14,
+      color: theme === "dark" ? "#FF6347" : "#800000",
+      fontWeight: "bold",
+    },
+    productInfoContainer: {
+      height: 600,
+    },
+  });
 
 export default ProductDetailScreen;

@@ -15,7 +15,6 @@ const WelcomeScreen = () => {
   const user = useSelector((state) => state.user);
 
   const titleOpacity = useRef(new Animated.Value(0)).current;
-  const buttonPosition = useRef(new Animated.Value(-500)).current;
 
   useEffect(() => {
     Animated.parallel([
@@ -24,13 +23,8 @@ const WelcomeScreen = () => {
         duration: 1000,
         useNativeDriver: true,
       }),
-      Animated.timing(buttonPosition, {
-        toValue: 0,
-        duration: 1000,
-        useNativeDriver: true,
-      }),
     ]).start();
-  }, [titleOpacity, buttonPosition]);
+  }, [titleOpacity]);
 
   useEffect(() => {
     if (user) {
@@ -40,9 +34,7 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.Text
-        style={[styles.title, { transform: [{ translateY: buttonPosition }] }]}
-      >
+      <Animated.Text style={[styles.title, { opacity: titleOpacity }]}>
         Welcome To Thrifty
       </Animated.Text>
 

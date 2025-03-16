@@ -7,6 +7,7 @@ import {
   FETCH_CATEGORIES_FAILURE,
   SET_USER,
   CLEAR_USER,
+  SET_THEME,
 } from "./actions";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   loading: false,
   error: null,
   user: null,
+  theme: "light",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,6 +38,8 @@ const rootReducer = (state = initialState, action) => {
       };
     case CLEAR_USER:
       return { ...state, user: null };
+    case SET_THEME:
+      return { ...state, theme: action.payload };
     default:
       return state;
   }
