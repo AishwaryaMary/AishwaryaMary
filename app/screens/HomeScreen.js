@@ -6,8 +6,10 @@ import {
   Text,
   TextInput,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   fetchProductsRequest,
   fetchProductsSuccess,
@@ -15,35 +17,65 @@ import {
   fetchCategoriesRequest,
   fetchCategoriesSuccess,
   fetchCategoriesFailure,
-} from "./redux/actions";
+  clearUser,
+} from "../redux/actions";
 
-import api from "./utils/api";
-import CategoryPill from "./components/CategoryPill";
-import ProductItem from "./components/ProductItem";
+import api from "../utils/api";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { useRouter } from "expo-router";
+import CategoryPill from "../components/CategoryPill";
+import ProductItem from "../components/ProductItem";
+import { signIn } from "../auth/signIn";
+
+const CACHE_KEY_PRODUCTS = "cached_products";
+const CACHE_KEY_CATEGORIES = "cached_categories";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { products, loading, error, categories } = useSelector(
+  const router = useRouter();
+
+  const { products, loading, error, categories, user } = useSelector(
     (state) => state
   );
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Fetch products and categories from API
   useEffect(() => {
     const fetchProductsAndCategories = async () => {
       dispatch(fetchProductsRequest());
       dispatch(fetchCategoriesRequest());
-      try {
-        const productsResponse = await api.get("/products");
-        dispatch(fetchProductsSuccess(productsResponse?.data));
 
+      try {
+        const cachedProducts = await AsyncStorage.getItem(CACHE_KEY_PRODUCTS);
+        const cachedCategories = await AsyncStorage.getItem(
+          CACHE_KEY_CATEGORIES
+        );
+
+        if (cachedProducts && cachedCategories) {
+          dispatch(fetchProductsSuccess(JSON.parse(cachedProducts)));
+          dispatch(fetchCategoriesSuccess(JSON.parse(cachedCategories)));
+          return;
+        }
+
+        // Fallback to network request if cache is empty
+        const productsResponse = await api.get("/products");
         const categoriesResponse = await api.get("/categories");
+
+        dispatch(fetchProductsSuccess(productsResponse?.data));
         dispatch(
           fetchCategoriesSuccess(
             categoriesResponse?.data.map((cat) => cat.name)
           )
+        );
+
+        await AsyncStorage.setItem(
+          CACHE_KEY_PRODUCTS,
+          JSON.stringify(productsResponse?.data)
+        );
+        await AsyncStorage.setItem(
+          CACHE_KEY_CATEGORIES,
+          JSON.stringify(categoriesResponse?.data.map((cat) => cat.name))
         );
       } catch (err) {
         dispatch(fetchProductsFailure(err.message));
@@ -54,7 +86,6 @@ const HomeScreen = () => {
     fetchProductsAndCategories();
   }, [dispatch]);
 
-  // Filter products based on search term and category
   const filteredProducts = products?.filter((product) => {
     return (
       (selectedCategory ? product.category.name === selectedCategory : true) &&
@@ -62,16 +93,47 @@ const HomeScreen = () => {
     );
   });
 
+  const handleLogout = async () => {
+    try {
+      await GoogleSignin.signOut();
+      dispatch(clearUser());
+    } catch (error) {
+      console.log("Error signing out", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      {/* Search Bar */}
+      <View style={styles.header}>
+        {user?.data?.user?.name ? (
+          <>
+            <Text style={styles.userText}>
+              Logged in as {user?.data?.user?.name}
+            </Text>
+            <TouchableOpacity
+              style={styles.logoutButton}
+              onPress={handleLogout}
+            >
+              <Text style={styles.logoutText}>Logout</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => signIn(dispatch, router)}
+          >
+            <Text style={styles.loginText}>Sign in with Google</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+
       <TextInput
         style={styles.searchBar}
         placeholder="Search products..."
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
-      {/* Category Pills */}
+
       <View style={styles.categoryContainer}>
         <FlatList
           data={categories}
@@ -90,7 +152,6 @@ const HomeScreen = () => {
         />
       </View>
 
-      {/* Product List */}
       {loading ? (
         <ActivityIndicator size="large" color="#8B5E3C" />
       ) : error ? (
@@ -105,7 +166,7 @@ const HomeScreen = () => {
               product={item}
               onPress={() =>
                 router.push({
-                  pathname: "/ProductDetail",
+                  pathname: "/screens/ProductDetailScreen",
                   params: { product: item },
                 })
               }
@@ -114,7 +175,7 @@ const HomeScreen = () => {
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.productList}
-          columnWrapperStyle={styles.columnWrapper} // Ensures even spacing between columns
+          columnWrapperStyle={styles.columnWrapper}
         />
       ) : (
         <Text style={styles.noResultsText}>
@@ -128,9 +189,40 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
+    paddingTop: 60,
     backgroundColor: "#F5EFE7",
     paddingHorizontal: 16,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 16,
+  },
+  userText: {
+    fontSize: 16,
+    color: "#8B5E3C",
+    fontWeight: "500",
+  },
+  logoutButton: {
+    backgroundColor: "#D2B48C",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 16,
+  },
+  logoutText: {
+    color: "#8B5E3C",
+    fontWeight: "600",
+  },
+  loginButton: {
+    backgroundColor: "#D2B48C",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+  },
+  loginText: {
+    color: "#8B5E3C",
+    fontWeight: "600",
   },
   searchBar: {
     height: 40,
@@ -146,22 +238,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   categoryContainer: {
-    gap: 8, // Space between category pills
-    paddingVertical: 4, // Reduced padding
+    paddingVertical: 4,
     marginBottom: 8,
-    flexGrow: 0, // Prevents the container from expanding unnecessarily
   },
   productList: {
-    paddingVertical: 12, // Consistent vertical padding
-    gap: 12, // Space between rows
+    paddingVertical: 12,
+    gap: 12,
   },
   columnWrapper: {
-    justifyContent: "space-between", // Even spacing between columns
-    gap: 12, // Space between columns
+    justifyContent: "space-between",
+    gap: 12,
   },
   productItem: {
-    flex: 1, // Allow flexible width
-    maxWidth: "48%", // Limit width to prevent overflow
+    flex: 1,
+    maxWidth: "48%",
   },
   noResultsText: {
     marginTop: 20,

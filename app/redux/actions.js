@@ -4,6 +4,8 @@ export const FETCH_CATEGORIES_FAILURE = "FETCH_CATEGORIES_FAILURE";
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
+export const SET_USER = "SET_USER";
+export const CLEAR_USER = "CLEAR_USER";
 
 export const fetchProductsRequest = () => ({
   type: FETCH_PRODUCTS_REQUEST,
@@ -31,4 +33,13 @@ export const fetchCategoriesSuccess = (categories) => ({
 export const fetchCategoriesFailure = (error) => ({
   type: FETCH_CATEGORIES_FAILURE,
   payload: error,
+});
+
+export const setUser = (user) => ({
+  type: SET_USER,
+  payload: user,
+});
+
+export const clearUser = () => ({
+  type: CLEAR_USER,
 });

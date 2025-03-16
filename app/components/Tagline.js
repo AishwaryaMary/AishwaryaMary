@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   tagline: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#8B5E3C", // Dark brown text
+    color: "#8B5E3C",
     textAlign: "center",
     marginBottom: 20,
   },

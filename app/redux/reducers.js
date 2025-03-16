@@ -5,6 +5,8 @@ import {
   FETCH_CATEGORIES_REQUEST,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
+  SET_USER,
+  CLEAR_USER,
 } from "./actions";
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   categories: [],
   loading: false,
   error: null,
+  user: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -26,6 +29,13 @@ const rootReducer = (state = initialState, action) => {
     case FETCH_PRODUCTS_FAILURE:
     case FETCH_CATEGORIES_FAILURE:
       return { ...state, loading: false, error: action.payload };
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case CLEAR_USER:
+      return { ...state, user: null };
     default:
       return state;
   }

@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
   },
   image: {
     width: "100%",

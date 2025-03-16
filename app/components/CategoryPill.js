@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#8B5E3C",
-    fontSize: 14, // Reduced font size
+    fontSize: 14,
     fontWeight: "bold",
     padding: 12,
   },

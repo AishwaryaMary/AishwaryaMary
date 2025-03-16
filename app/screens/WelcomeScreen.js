@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "expo-router";
+import { useSelector } from "react-redux";
 import {
   View,
   Text,
@@ -7,16 +8,15 @@ import {
   StyleSheet,
   Animated,
 } from "react-native";
-import Login from "./Login";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 
 const WelcomeScreen = () => {
   const router = useRouter();
+  const user = useSelector((state) => state.user);
 
-  // Animation values
-  const titleOpacity = useRef(new Animated.Value(0)).current; // For title fade-in
-  const buttonPosition = useRef(new Animated.Value(500)).current; // For button slide-up
+  const titleOpacity = useRef(new Animated.Value(0)).current;
+  const buttonPosition = useRef(new Animated.Value(-500)).current;
 
-  // Start the animations when the component mounts
   useEffect(() => {
     Animated.parallel([
       Animated.timing(titleOpacity, {
@@ -32,27 +32,35 @@ const WelcomeScreen = () => {
     ]).start();
   }, [titleOpacity, buttonPosition]);
 
+  useEffect(() => {
+    if (user) {
+      router.push("/screens/HomeScreen");
+    }
+  }, [user]);
+
   return (
     <View style={styles.container}>
-      {/* Title with fade-in effect */}
-      <Animated.Text style={[styles.title, { opacity: titleOpacity }]}>
-        Welcome to Thrifty
+      <Animated.Text
+        style={[styles.title, { transform: [{ translateY: buttonPosition }] }]}
+      >
+        Welcome To Thrifty
       </Animated.Text>
 
-      {/* Button with slide-up effect */}
       <Animated.View
-        style={[
-          styles.buttonContainer,
-          { transform: [{ translateY: buttonPosition }] },
-        ]}
+        style={[styles.buttonContainer, { opacity: titleOpacity }]}
       >
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/HomeScreen")}
+          onPress={() => router.push("/screens/HomeScreen")}
         >
-          <Text style={styles.buttonText}>Get Started →</Text>
+          <Text style={styles.buttonText}>Continue As A Guest →</Text>
         </TouchableOpacity>
-        <Login />
+
+        <View style={styles.orContainer}>
+          <Text style={styles.buttonText}>or</Text>
+        </View>
+
+        <GoogleSignInButton />
       </Animated.View>
     </View>
   );
@@ -63,27 +71,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5EFE7", // Nude brown background
+    backgroundColor: "#F5EFE7",
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#8B5E3C", // Darker brown text
+    color: "#8B5E3C",
     marginBottom: 20,
   },
   buttonContainer: {
     marginTop: 20,
   },
   button: {
-    backgroundColor: "#D2B48C", // Beige button
+    backgroundColor: "#D2B48C",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 25,
   },
   buttonText: {
     fontSize: 18,
-    color: "#8B5E3C", // Darker brown text
+    color: "#8B5E3C",
     fontWeight: "600",
+  },
+  orContainer: {
+    alignItems: "center",
+    paddingVertical: 12,
   },
 });
 

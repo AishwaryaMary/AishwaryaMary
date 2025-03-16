@@ -5,17 +5,8 @@ const CLIENT_ID_IOS =
 const CLIENT_ID_ANDROID =
   "992933353705-s048d5c9kgmlbkfq494i8q81lmoggg82.apps.googleusercontent.com";
 
-const REDIRECT_URI = "https://auth.expo.io/@aishu97/thriftyapp";
-const AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth`;
-const TOKEN_URL = `https://oauth2.googleapis.com/token`;
-
 export default {
   CLIENT_ID_WEB,
   CLIENT_ID_IOS,
   CLIENT_ID_ANDROID,
-  REDIRECT_URI,
-  AUTH_URL,
-  TOKEN_URL,
 };
-
-// Client secret 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

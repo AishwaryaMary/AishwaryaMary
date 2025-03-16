@@ -9,15 +9,22 @@ const ProductItem = ({ product }) => {
       style={styles.container}
       onPress={() =>
         router.push({
-          pathname: "/ProductDetail",
-          params: product,
+          pathname: "/screens/ProductDetailScreen",
+          params: {
+            id: product?.id,
+            title: product?.title,
+            price: product?.price?.toString(),
+            description: product?.description,
+            category: product?.category?.name,
+            images: JSON.stringify(product?.images),
+          },
         })
       }
     >
       <View style={styles.imageContainer}>
         {product.images?.[0] ? (
           <Image
-            source={{ uri: product.images?.[0] }}
+            source={{ uri: product?.images?.[0] }}
             style={styles.image}
             resizeMode="cover"
           />
@@ -27,7 +34,7 @@ const ProductItem = ({ product }) => {
       </View>
       <Text style={styles.title}>{product?.title}</Text>
       <Text style={styles.price}>
-        {product?.price ? formatPrice(product.price) : "No price available"}
+        {product?.price ? formatPrice(product?.price) : "No price available"}
       </Text>
       <Text style={styles.category}>
         {product?.category?.name || "No category"}
