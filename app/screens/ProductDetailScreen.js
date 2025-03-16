@@ -35,7 +35,8 @@ const ProductDetailScreen = () => {
     if (products?.length) {
       const filteredProducts = products.filter(
         (item) =>
-          item.category.name === product.category && item.id !== product.id
+          item.category.name === product.category &&
+          item.id !== Number(product.id)
       );
       setRelatedProducts(filteredProducts);
     }
@@ -81,12 +82,12 @@ const ProductDetailScreen = () => {
                   router.push({
                     pathname: "/screens/ProductDetailScreen",
                     params: {
-                      id: item.id,
-                      title: item.title,
-                      price: item.price,
-                      description: item.description,
-                      category: item.category.name,
-                      images: JSON.stringify(item.images),
+                      id: item?.id,
+                      title: item?.title,
+                      price: item?.price,
+                      description: item?.description,
+                      category: item?.category?.name,
+                      images: JSON.stringify(item?.images),
                     },
                   })
                 }
