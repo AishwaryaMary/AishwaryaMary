@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import AuthConfig from "../auth/AuthConfig";
+import AuthConfig from "../../auth/AuthConfig";
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
-import { signIn } from "../auth/signIn";
+import { signIn } from "../../auth/signIn";
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
 

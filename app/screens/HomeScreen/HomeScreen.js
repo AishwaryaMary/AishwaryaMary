@@ -21,13 +21,14 @@ import {
   fetchCategoriesFailure,
   clearUser,
   setTheme,
-} from "../redux/actions";
-import api from "../utils/api";
+} from "../../redux/actions";
+import api from "../../utils/api";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useRouter } from "expo-router";
-import CategoryPill from "../components/CategoryPill";
-import ProductItem from "../components/ProductItem";
-import { signIn } from "../auth/signIn";
+import CategoryPill from "../../components/CategoryPill/views/CategoryPill";
+import { signIn } from "../../auth/signIn";
+import ProductItem from "../../components/ProductItem/views/ProductItem";
+import SearchBar from "../../components/SearchBar/views/SearchBar";
 
 const CACHE_KEY_PRODUCTS = "cached_products";
 const CACHE_KEY_CATEGORIES = "cached_categories";
@@ -158,11 +159,10 @@ const HomeScreen = () => {
         )}
       </View>
 
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Search products..."
-        value={searchTerm}
-        onChangeText={setSearchTerm}
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        theme={theme}
       />
 
       <View style={styles.categoryContainer}>
@@ -243,15 +243,7 @@ const getStyles = (theme) =>
       color: theme === "dark" ? "#FF6347" : "#8B5E3C",
       fontWeight: "bold",
     },
-    searchBar: {
-      height: 40,
-      borderColor: theme === "dark" ? "red" : "#D2B48C",
-      borderWidth: 1,
-      borderRadius: 8,
-      paddingHorizontal: 10,
-      marginBottom: 12,
-      backgroundColor: "#FFFFFF",
-    },
+
     errorText: {
       color: "red",
       textAlign: "center",

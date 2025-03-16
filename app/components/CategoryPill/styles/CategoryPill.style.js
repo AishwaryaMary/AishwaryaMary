@@ -1,17 +1,5 @@
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
-const CategoryPill = ({ category, isSelected, onPress, theme }) => {
-  const styles = getStyles(theme);
-  return (
-    <TouchableOpacity
-      style={[styles.pill, isSelected && styles.pillSelected]}
-      onPress={onPress}
-    >
-      <Text style={styles.text}>{category}</Text>
-    </TouchableOpacity>
-  );
-};
 const getStyles = (theme) =>
   StyleSheet.create({
     pill: {
@@ -35,4 +23,4 @@ const getStyles = (theme) =>
     },
   });
 
-export default CategoryPill;
+export default getStyles;

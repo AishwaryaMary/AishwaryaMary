@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSelector } from "react-redux";
-import ProductCarousel from "../components/ProductCarousel";
-import { formatPrice } from "../utils/formatPrice";
+import { formatPrice } from "../../utils/formatPrice";
+import ProductCarousel from "../../components/ProductCarousel/views/ProductCarousel";
 
 const ProductDetailScreen = () => {
   const params = useLocalSearchParams();
@@ -47,7 +47,7 @@ const ProductDetailScreen = () => {
     <ScrollView style={styles.container}>
       <View style={styles.productInfoContainer}>
         <TouchableOpacity
-          onPress={() => router.push("/screens/HomeScreen")}
+          onPress={() => router.push("/screens/HomeScreen/HomeScreen")}
           style={styles.backButton}
         >
           <Text style={styles.backText}>← Back</Text>
@@ -81,7 +81,8 @@ const ProductDetailScreen = () => {
                 style={styles.relatedItem}
                 onPress={() =>
                   router.push({
-                    pathname: "/screens/ProductDetailScreen",
+                    pathname:
+                      "/screens/ProductDetailScreen/ProductDetailScreen",
                     params: {
                       id: item?.id,
                       title: item?.title,
@@ -144,7 +145,7 @@ const getStyles = (theme) =>
       shadowRadius: 8,
       elevation: 5,
       paddingHorizontal: "3%",
-      backgroundColor: theme === "dark" ? "none" : "#FFFFFF",
+      backgroundColor: "none",
     },
     detailsContainer: {
       padding: 16,
@@ -169,7 +170,7 @@ const getStyles = (theme) =>
     },
     price: {
       fontSize: 20,
-      color: theme === "dark" ? "#FF6347" : "#800000", // Tomato color for dark mode
+      color: theme === "dark" ? "#FF6347" : "#800000",
       marginBottom: 12,
       fontWeight: "bold",
       textAlign: "center",

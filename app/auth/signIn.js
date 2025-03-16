@@ -14,7 +14,7 @@ export const signIn = async (dispatch, router) => {
 
     dispatch(setUser(userInfo));
 
-    router.push("/screens/HomeScreen");
+    router.push("/screens/HomeScreen/HomeScreen");
   } catch (error) {
     if (isErrorWithCode(error)) {
       switch (error.code) {

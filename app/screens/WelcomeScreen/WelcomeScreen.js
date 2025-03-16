@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Animated,
 } from "react-native";
-import GoogleSignInButton from "../components/GoogleSignInButton";
+import GoogleSignInButton from "../../components/SignIn/GoogleSignInButton";
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -43,7 +43,7 @@ const WelcomeScreen = () => {
       >
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/screens/HomeScreen")}
+          onPress={() => router.push("/screens/HomeScreen/HomeScreen")}
         >
           <Text style={styles.buttonText}>Continue As A Guest →</Text>
         </TouchableOpacity>

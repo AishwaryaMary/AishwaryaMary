@@ -1,5 +1,6 @@
 import React from "react";
-import { FlatList, Image, StyleSheet, View } from "react-native";
+import { FlatList, Image, View } from "react-native";
+import styles from "../styles/ProductCarousel.style";
 
 const ProductCarousel = ({ images }) => {
   return (
@@ -20,24 +21,5 @@ const ProductCarousel = ({ images }) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    width: 300,
-    height: 200,
-    marginRight: 10,
-    borderRadius: 10,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-  },
-});
 
 export default ProductCarousel;
