@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router } from "expo-router";
-import { formatPrice } from "../../../utils/formatPrice";
+import { formatPrice } from "../../../../utils/formatPrice";
 import getStyles from "../styles/ProductItem.style";
 
 const ProductItem = ({ product, theme }) => {
@@ -12,7 +12,7 @@ const ProductItem = ({ product, theme }) => {
       style={styles.container}
       onPress={() =>
         router.push({
-          pathname: "/screens/ProductDetailScreen/ProductDetailScreen",
+          pathname: "/screens/ProductDetailScreen/views/ProductDetailScreen",
           params: {
             id: product?.id,
             title: product?.title,
