@@ -7,9 +7,11 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
+  Switch,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialIcons } from "@expo/vector-icons";
 import {
   fetchProductsRequest,
   fetchProductsSuccess,
@@ -20,7 +22,6 @@ import {
   clearUser,
   setTheme,
 } from "../redux/actions";
-
 import api from "../utils/api";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useRouter } from "expo-router";
@@ -42,6 +43,7 @@ const HomeScreen = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [cyderesMode, setCyderesMode] = useState(theme === "dark");
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const fetchProductsAndCategories = async () => {
@@ -88,17 +90,17 @@ const HomeScreen = () => {
     fetchProductsAndCategories();
   }, [dispatch]);
 
-  const filteredProducts = products?.filter((product) => {
-    return (
+  const filteredProducts = products?.filter(
+    (product) =>
       (selectedCategory ? product.category.name === selectedCategory : true) &&
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  );
 
   const handleLogout = async () => {
     try {
       await GoogleSignin.signOut();
       dispatch(clearUser());
+      setShowDropdown(false);
     } catch (error) {
       console.log("Error signing out", error);
     }
@@ -115,25 +117,44 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {user?.data?.user?.name ? (
-          <>
-            <Text style={styles.userText}>
-              Logged in as {user?.data?.user?.name}
-            </Text>
-            <TouchableOpacity
-              style={styles.logoutButton}
-              onPress={handleLogout}
-            >
-              <Text style={styles.logoutText}>Logout</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => signIn(dispatch, router)}
-          >
-            <Text style={styles.loginText}>Sign in with Google</Text>
-          </TouchableOpacity>
+        <View style={styles.toggleContainer}>
+          <Text style={styles.toggleLabel}>
+            {cyderesMode ? "CYDERES Mode Enabled" : "Enter CYDERES Mode"}
+          </Text>
+          <Switch
+            value={cyderesMode}
+            onValueChange={handleToggleTheme}
+            trackColor={{ false: "#D2B48C", true: "#1F1F1F" }}
+            thumbColor={cyderesMode ? "#FFFFFF" : "#8B5E3C"}
+          />
+        </View>
+        <TouchableOpacity onPress={() => setShowDropdown(!showDropdown)}>
+          <MaterialIcons
+            name="account-circle"
+            size={32}
+            color={theme === "dark" ? "#FFFFFF" : "#8B5E3C"}
+          />
+        </TouchableOpacity>
+
+        {showDropdown && (
+          <View style={styles.dropdown}>
+            {user?.data?.user?.name ? (
+              <>
+                <Text style={styles.dropdownText}>
+                  Logged in as {user?.data?.user?.name}
+                </Text>
+                <TouchableOpacity onPress={handleLogout}>
+                  <Text style={styles.dropdownActionText}>Log out</Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <TouchableOpacity onPress={() => signIn(dispatch, router)}>
+                <Text style={styles.dropdownActionText}>
+                  Sign in with Google
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         )}
       </View>
 
@@ -173,17 +194,7 @@ const HomeScreen = () => {
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           renderItem={({ item }) => (
-            <ProductItem
-              product={item}
-              onPress={() =>
-                router.push({
-                  pathname: "/screens/ProductDetailScreen",
-                  params: { product: item },
-                })
-              }
-              style={styles.productItem}
-              theme={theme}
-            />
+            <ProductItem product={item} theme={theme} />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.productList}
@@ -205,44 +216,32 @@ const getStyles = (theme) =>
       paddingTop: 60,
       backgroundColor: theme === "dark" ? "#121212" : "#F5EFE7",
       paddingHorizontal: 16,
-      borderColor: theme === "dark" ? "red" : "transparent",
-      borderWidth: theme === "dark" ? 2 : 0,
     },
     header: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingBottom: 16,
-      borderWidth: theme === "dark" ? 2 : 0,
+      marginBottom: 16,
     },
-    userText: {
-      fontSize: 16,
+    dropdown: {
+      position: "absolute",
+      top: 40,
+      right: 0,
+      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      padding: 8,
+      borderRadius: 8,
+      shadowColor: "#000",
+      shadowOpacity: 0.2,
+      shadowOffset: { width: 0, height: 2 },
+      zIndex: 1000,
+    },
+    dropdownText: {
       color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
-      fontWeight: "500",
+      marginBottom: 8,
     },
-    logoutButton: {
-      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
-      paddingVertical: 8,
-      paddingHorizontal: 12,
-      borderRadius: 16,
-      borderColor: theme === "dark" ? "red" : "transparent",
-      borderWidth: theme === "dark" ? 1 : 0,
-    },
-    logoutText: {
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
-      fontWeight: "600",
-    },
-    loginButton: {
-      backgroundColor: theme === "dark" ? "#1F1F1F" : "#D2B48C",
-      paddingVertical: 8,
-      paddingHorizontal: 16,
-      borderRadius: 16,
-      borderColor: theme === "dark" ? "red" : "transparent",
-      borderWidth: theme === "dark" ? 1 : 0,
-    },
-    loginText: {
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
-      fontWeight: "600",
+    dropdownActionText: {
+      color: theme === "dark" ? "#FF6347" : "#8B5E3C",
+      fontWeight: "bold",
     },
     searchBar: {
       height: 40,
@@ -294,6 +293,17 @@ const getStyles = (theme) =>
     toggleButtonText: {
       color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
       fontWeight: "600",
+    },
+    toggleContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    toggleLabel: {
+      fontSize: 16,
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      marginRight: 10,
+      fontWeight: "500",
     },
   });
 
