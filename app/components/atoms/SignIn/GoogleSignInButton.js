@@ -1,12 +1,12 @@
 import { View } from "react-native";
-import AuthConfig from "../../../auth/AuthConfig";
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
-import SignIn from "../../../auth/SignIn";
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
+import AuthConfig from "../../../auth/AuthConfig";
+import SignIn from "../../../auth/SignIn";
 
 GoogleSignin.configure({
   webClientId: AuthConfig?.CLIENT_ID_WEB,
