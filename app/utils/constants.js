@@ -5,5 +5,6 @@ export const ROUTES = Object.freeze({
 
 export const CACHE_KEY_PRODUCTS = "cached_products";
 export const CACHE_KEY_CATEGORIES = "cached_categories";
+export const DEFAULT_IMAGE = "https://via.placeholder.com/300";
 
 export default ROUTES;

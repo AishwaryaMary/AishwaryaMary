@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router } from "expo-router";
 import formatPrice from "../../../../utils/formatPrice";
@@ -6,29 +6,43 @@ import getStyles from "../styles/ProductItem.style";
 import ROUTES from "../../../../utils/constants";
 
 const ProductItem = ({ product, theme }) => {
+  const { id, title, price, description, category, images } = product || {};
+  const [isValidImage, setIsValidImage] = useState(true);
+
   const styles = getStyles(theme);
 
+  useEffect(() => {
+    if (images?.[0]) {
+      Image.getSize(
+        images[0],
+        () => setIsValidImage(true),
+        () => setIsValidImage(false)
+      );
+    } else {
+      setIsValidImage(false);
+    }
+  }, [images?.[0]]);
+
+  const handlePress = () => {
+    router.push({
+      pathname: ROUTES.productDetails,
+      params: {
+        id,
+        title,
+        price: price?.toString(),
+        description,
+        category: category?.name,
+        images: JSON.stringify(images),
+      },
+    });
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() =>
-        router.push({
-          pathname: ROUTES?.productDetails,
-          params: {
-            id: product?.id,
-            title: product?.title,
-            price: product?.price?.toString(),
-            description: product?.description,
-            category: product?.category?.name,
-            images: JSON.stringify(product?.images),
-          },
-        })
-      }
-    >
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View style={styles.imageContainer}>
-        {product.images?.[0] ? (
+        {isValidImage ? (
           <Image
-            source={{ uri: product?.images?.[0] }}
+            source={{ uri: images?.[0] }}
             style={styles.image}
             resizeMode="cover"
           />
@@ -36,13 +50,11 @@ const ProductItem = ({ product, theme }) => {
           <Text style={styles.imageAlt}>Image Not Available</Text>
         )}
       </View>
-      <Text style={styles.title}>{product?.title}</Text>
+      <Text style={styles.title}>{title || "No title"}</Text>
       <Text style={styles.price}>
-        {product?.price ? formatPrice(product?.price) : "No price available"}
+        {price ? formatPrice(price) : "No price available"}
       </Text>
-      <Text style={styles.category}>
-        {product?.category?.name || "No category"}
-      </Text>
+      <Text style={styles.category}>{category?.name || "No category"}</Text>
     </TouchableOpacity>
   );
 };

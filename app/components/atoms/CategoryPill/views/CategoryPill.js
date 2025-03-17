@@ -8,8 +8,9 @@ const CategoryPill = ({ category, isSelected, onPress, theme }) => {
     <TouchableOpacity
       style={[styles.pill, isSelected && styles.pillSelected]}
       onPress={onPress}
+      activeOpacity={0.7}
     >
-      <Text style={styles.text}>{category}</Text>
+      <Text style={styles.text}>{category || "No category"}</Text>
     </TouchableOpacity>
   );
 };

@@ -8,35 +8,41 @@ const CategoryList = ({
   setSelectedCategory,
   theme,
 }) => {
-  const styles = getStyles(theme);
+  const styles = getStyles();
+
+  const handlePress = (item) =>
+    setSelectedCategory(item === selectedCategory ? null : item);
+
+  const renderItem = ({ item }) => (
+    <CategoryPill
+      category={item}
+      isSelected={selectedCategory === item}
+      onPress={() => handlePress(item)}
+      theme={theme}
+    />
+  );
+
   return (
     <View style={styles.categoryContainer}>
       <FlatList
         data={categories}
-        keyExtractor={(item) => item}
+        keyExtractor={(item, index) => `${item}-${index}`}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <CategoryPill
-            category={item}
-            isSelected={selectedCategory === item}
-            onPress={() =>
-              setSelectedCategory(item === selectedCategory ? null : item)
-            }
-            theme={theme}
-          />
-        )}
+        renderItem={renderItem}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        removeClippedSubviews={true}
       />
     </View>
   );
 };
-
-const getStyles = (theme) =>
+const getStyles = () =>
   StyleSheet.create({
     categoryContainer: {
       paddingVertical: 4,
       marginBottom: 8,
     },
   });
-
 export default CategoryList;

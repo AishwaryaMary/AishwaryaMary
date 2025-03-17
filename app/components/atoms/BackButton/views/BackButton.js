@@ -7,12 +7,10 @@ import ROUTES from "../../../../utils/constants";
 const BackButton = ({ theme }) => {
   const router = useRouter();
   const styles = getBackButtonStyles(theme);
+  const handlePress = () => router.push(ROUTES.home);
 
   return (
-    <TouchableOpacity
-      onPress={() => router.push(ROUTES?.home)}
-      style={styles.backButton}
-    >
+    <TouchableOpacity onPress={handlePress} style={styles.backButton}>
       <Text style={styles.backText}>← Back</Text>
     </TouchableOpacity>
   );

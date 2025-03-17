@@ -19,6 +19,10 @@ const Header = ({
   const styles = getHeaderStyles(theme);
   const colors = theme === "dark" ? COLORS.dark : COLORS.light;
 
+  const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
+  const handleSignIn = () => SignInAuth(dispatch, router);
+
   return (
     <View style={styles.header}>
       <View style={styles.toggleContainer}>
@@ -33,35 +37,21 @@ const Header = ({
         />
       </View>
       <View style={styles.userNameContainer}>
-        <View>
-          <TouchableOpacity onPress={() => setShowDropdown(!showDropdown)}>
-            <MaterialIcons
-              name="account-circle"
-              size={32}
-              color={colors?.text}
-            />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text style={styles.userName}>
-            {user?.data?.user?.name ?? "Guest"}
-          </Text>
-        </View>
+        <TouchableOpacity onPress={toggleDropdown}>
+          <MaterialIcons name="account-circle" size={32} color={colors.text} />
+        </TouchableOpacity>
+        <Text style={styles.userName}>{user?.data?.user?.name || "Guest"}</Text>
       </View>
 
       {showDropdown && (
         <View style={styles.dropdown}>
-          {user?.data?.user?.name ? (
-            <>
-              <TouchableOpacity onPress={handleLogout}>
-                <Text style={styles.dropdownActionText}>Log out</Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <TouchableOpacity onPress={() => SignInAuth(dispatch, router)}>
-              <Text style={styles.dropdownActionText}>Sign in with Google</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={user?.data?.user?.name ? handleLogout : handleSignIn}
+          >
+            <Text style={styles.dropdownActionText}>
+              {user?.data?.user?.name ? "Log out" : "Sign in with Google"}
+            </Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>

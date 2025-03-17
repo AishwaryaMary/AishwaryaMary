@@ -39,7 +39,7 @@ const getProductInfoStyles = (theme) => {
       textAlign: "center",
     },
     description: {
-      fontSize: 16,
+      fontSize: 12,
       color: colors?.descriptionComponent,
       lineHeight: 24,
     },

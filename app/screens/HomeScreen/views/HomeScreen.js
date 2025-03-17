@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Image } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { clearUser, setTheme } from "../../../redux/actions";
@@ -15,12 +15,17 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const products = useSelector((state) => state.products);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
-  const categories = useSelector((state) => state.categories);
-  const user = useSelector((state) => state.user);
-  const theme = useSelector((state) => state.theme);
+  const { products, loading, error, categories, user, theme } = useSelector(
+    (state) => ({
+      products: state.products,
+      loading: state.loading,
+      error: state.error,
+      categories: state.categories,
+      user: state.user,
+      theme: state.theme,
+    }),
+    shallowEqual
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);

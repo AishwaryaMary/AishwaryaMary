@@ -11,7 +11,7 @@ const getStyles = (theme) => {
       paddingTop: "15%",
     },
     productInfoContainer: {
-      height: 600,
+      height: 550,
     },
     carouselContainer: {
       marginBottom: 20,

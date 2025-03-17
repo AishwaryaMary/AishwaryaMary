@@ -31,7 +31,11 @@ const ProductDetailScreen = () => {
   const styles = getStyles(theme);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      removeClippedSubviews
+    >
       <View style={styles.productInfoContainer}>
         <BackButton theme={theme} />
         <ImageCarousel images={product?.images} />
