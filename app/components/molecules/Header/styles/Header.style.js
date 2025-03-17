@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getHeaderStyles = (theme) => {
+const getHeaderStyles = (theme) => {
   return StyleSheet.create({
     header: {
       flexDirection: "row",
@@ -41,3 +41,5 @@ export const getHeaderStyles = (theme) => {
     },
   });
 };
+
+export default getHeaderStyles;

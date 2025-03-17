@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Text, ActivityIndicator } from "react-native";
 import ProductItem from "../../../atoms/ProductItem/views/ProductItem";
-import { getProductListStyles } from "../styles/ProductList.style";
+import getProductListStyles from "../styles/ProductList.style";
 
 const ProductList = ({ filteredProducts, loading, error, theme }) => {
   const styles = getProductListStyles(theme);

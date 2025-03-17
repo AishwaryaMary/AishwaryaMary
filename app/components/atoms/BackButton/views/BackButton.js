@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { useRouter } from "expo-router";
-import { getBackButtonStyles } from "../styles/BackButton.style";
+import getBackButtonStyles from "../styles/BackButton.style";
 
 const BackButton = ({ theme }) => {
   const router = useRouter();

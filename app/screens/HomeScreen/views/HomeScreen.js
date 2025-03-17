@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,7 +19,7 @@ import Header from "../../../components/molecules/Header/views/Header";
 import CategoryList from "../../../components/molecules/CategoryList/CategoryList";
 import ProductList from "../../../components/molecules/ProductList/views/ProductList";
 import SearchBar from "../../../components/atoms/SearchBar/views/SearchBar";
-import { getStyles } from "../styles/HomeScreen.style";
+import getStyles from "../styles/HomeScreen.style";
 
 const CACHE_KEY_PRODUCTS = "cached_products";
 const CACHE_KEY_CATEGORIES = "cached_categories";
@@ -106,6 +106,18 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image
+          source={
+            cyderesMode
+              ? require("../../../../assets/images/logo_dark.png")
+              : require("../../../../assets/images/logo_light.png")
+          }
+          style={[styles.logo]}
+          resizeMode="contain"
+        />
+      </View>
+
       <Header
         cyderesMode={cyderesMode}
         setCyderesMode={setCyderesMode}

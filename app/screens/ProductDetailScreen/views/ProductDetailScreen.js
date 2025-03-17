@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useSelector } from "react-redux";
-import { getStyles } from "../styles/ProductDetailScreen.style";
+import getStyles from "../styles/ProductDetailScreen.style";
 import BackButton from "../../../components/atoms/BackButton/views/BackButton";
 import ImageCarousel from "../../../components/atoms/ImageCarousel/views/ImageCarousel";
 import ProductDetails from "../../../components/molecules/ProductDetails/views/ProductDetails";

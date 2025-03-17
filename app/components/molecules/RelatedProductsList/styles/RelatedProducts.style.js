@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getRelatedProductsStyles = (theme) =>
+const getRelatedProductsStyles = (theme) =>
   StyleSheet.create({
     relatedProductsContainer: {
       marginTop: 10,
@@ -44,3 +44,5 @@ export const getRelatedProductsStyles = (theme) =>
       fontWeight: "bold",
     },
   });
+
+export default getRelatedProductsStyles;

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { getProductInfoStyles } from "../styles/ProductDetails.style";
-import { formatPrice } from "../../../../utils/formatPrice";
+import formatPrice from "../../../../utils/formatPrice";
+import getProductInfoStyles from "../styles/ProductDetails.style";
 
 const ProductDetails = ({ title, price, description, theme }) => {
   const styles = getProductInfoStyles(theme);

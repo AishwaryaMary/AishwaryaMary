@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { signIn } from "../../../../auth/signIn";
-import { getHeaderStyles } from "../styles/Header.style";
+import signIn from "../../../../auth/signIn";
+import getHeaderStyles from "../styles/Header.style";
 
 const Header = ({
   cyderesMode,

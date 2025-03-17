@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { View, Text, TouchableOpacity, Animated, Image } from "react-native";
 import GoogleSignInButton from "../../../components/atoms/SignIn/GoogleSignInButton";
 import styles from "../styles/WelcomeScreen.style";
 
@@ -9,17 +9,30 @@ const WelcomeScreen = () => {
   const router = useRouter();
   const user = useSelector((state) => state.user);
 
-  const titleOpacity = useRef(new Animated.Value(0)).current;
+  const logoOpacity = useRef(new Animated.Value(0)).current;
+  const logoTranslateY = useRef(new Animated.Value(20)).current;
+  const buttonsOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.parallel([
-      Animated.timing(titleOpacity, {
+      Animated.timing(logoOpacity, {
         toValue: 1,
-        duration: 1000,
+        duration: 800,
         useNativeDriver: true,
       }),
-    ]).start();
-  }, [titleOpacity]);
+      Animated.timing(logoTranslateY, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      Animated.timing(buttonsOpacity, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }).start();
+    });
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -29,12 +42,19 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.Text style={[styles.title, { opacity: titleOpacity }]}>
-        Welcome To Thrifty
-      </Animated.Text>
+      <Animated.Image
+        source={require("../../../../assets/images/logo_light.png")}
+        style={[
+          {
+            opacity: logoOpacity,
+            transform: [{ translateY: logoTranslateY }],
+          },
+        ]}
+        resizeMode="contain"
+      />
 
       <Animated.View
-        style={[styles.buttonContainer, { opacity: titleOpacity }]}
+        style={[styles.buttonContainer, { opacity: buttonsOpacity }]}
       >
         <TouchableOpacity
           style={styles.button}
@@ -44,7 +64,7 @@ const WelcomeScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.orContainer}>
-          <Text style={styles.buttonText}>or</Text>
+          <Text style={styles.buttonTextOr}>-- or --</Text>
         </View>
 
         <GoogleSignInButton />

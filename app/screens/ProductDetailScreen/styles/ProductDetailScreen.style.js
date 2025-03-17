@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (theme) =>
+const getStyles = (theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -20,6 +20,8 @@ export const getStyles = (theme) =>
       shadowRadius: 8,
       elevation: 5,
       paddingHorizontal: "3%",
-      backgroundColor: "none",
+      backgroundColor: "transparent",
     },
   });
+
+export default getStyles;

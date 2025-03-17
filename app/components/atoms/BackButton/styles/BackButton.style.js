@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getBackButtonStyles = (theme) =>
+const getBackButtonStyles = (theme) =>
   StyleSheet.create({
     backButton: {
       padding: 10,
@@ -15,3 +15,5 @@ export const getBackButtonStyles = (theme) =>
       fontWeight: "bold",
     },
   });
+
+export default getBackButtonStyles;

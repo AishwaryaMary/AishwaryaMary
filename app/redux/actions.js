@@ -49,3 +49,17 @@ export const setTheme = (theme) => ({
   type: SET_THEME,
   payload: theme,
 });
+
+const actions = {
+  fetchProductsRequest,
+  fetchProductsSuccess,
+  fetchProductsFailure,
+  fetchCategoriesRequest,
+  fetchCategoriesSuccess,
+  fetchCategoriesFailure,
+  setUser,
+  clearUser,
+  setTheme,
+};
+
+export default actions;

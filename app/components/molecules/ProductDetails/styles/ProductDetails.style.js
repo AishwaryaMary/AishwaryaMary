@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getProductInfoStyles = (theme) =>
+const getProductInfoStyles = (theme) =>
   StyleSheet.create({
     detailsContainer: {
       padding: 16,
@@ -41,3 +41,5 @@ export const getProductInfoStyles = (theme) =>
       lineHeight: 24,
     },
   });
+
+export default getProductInfoStyles;

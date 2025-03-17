@@ -1,8 +1,8 @@
 import React from "react";
 import { View, FlatList, TouchableOpacity, Text, Image } from "react-native";
 import { useRouter } from "expo-router";
-import { getRelatedProductsStyles } from "../styles/RelatedProducts.style";
-import { formatPrice } from "../../../../utils/formatPrice";
+import getRelatedProductsStyles from "../styles/RelatedProducts.style";
+import formatPrice from "../../../../utils/formatPrice";
 
 const RelatedProducts = ({ relatedProducts, theme }) => {
   const router = useRouter();

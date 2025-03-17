@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getProductListStyles = (theme) => {
+const getProductListStyles = (theme) => {
   return StyleSheet.create({
     errorText: {
       color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
@@ -24,3 +24,5 @@ export const getProductListStyles = (theme) => {
     },
   });
 };
+
+export default getProductListStyles;

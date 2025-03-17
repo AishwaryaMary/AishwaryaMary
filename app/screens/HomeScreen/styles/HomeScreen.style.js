@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (theme) =>
+const getStyles = (theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -65,4 +65,13 @@ export const getStyles = (theme) =>
       fontSize: 16,
       marginTop: 20,
     },
+    logoContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    logo: {
+      height: 100,
+      width: 100,
+    },
   });
+export default getStyles;

@@ -21,9 +21,17 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
+    color: "#8B5E3C",
+    fontWeight: "600",
+  },
+
+  buttonTextOr: {
+    fontSize: 14,
     color: "#8B5E3C",
     fontWeight: "600",
   },
