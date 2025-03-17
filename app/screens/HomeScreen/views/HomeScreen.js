@@ -64,7 +64,7 @@ const HomeScreen = () => {
         dispatch(fetchProductsSuccess(productsResponse?.data));
         dispatch(
           fetchCategoriesSuccess(
-            categoriesResponse?.data.map((cat) => ca?.name)
+            categoriesResponse?.data.map((cat) => cat?.name)
           )
         );
 

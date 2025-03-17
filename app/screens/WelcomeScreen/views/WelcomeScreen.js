@@ -60,7 +60,7 @@ const WelcomeScreen = () => {
           style={styles.button}
           onPress={() => router.push("/screens/HomeScreen/views/HomeScreen")}
         >
-          <Text style={styles.buttonText}>Continue As A Guest →</Text>
+          <Text style={styles.buttonText}>Continue as a Guest →</Text>
         </TouchableOpacity>
 
         <View style={styles.orContainer}>
