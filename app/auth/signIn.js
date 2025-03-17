@@ -4,8 +4,9 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import { setUser } from "../redux/actions";
+import ROUTES from "../utils/constants";
 
-const signIn = async (dispatch, router) => {
+const SignIn = async (dispatch, router) => {
   try {
     await GoogleSignin.hasPlayServices();
 
@@ -18,7 +19,7 @@ const signIn = async (dispatch, router) => {
 
     dispatch(setUser(userInfo));
 
-    router.push("/screens/HomeScreen/views/HomeScreen");
+    router.push(ROUTES?.home);
   } catch (error) {
     let errorMessage = "An unexpected error occurred during login.";
 
@@ -35,4 +36,4 @@ const signIn = async (dispatch, router) => {
   }
 };
 
-export default signIn;
+export default SignIn;

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router } from "expo-router";
 import formatPrice from "../../../../utils/formatPrice";
 import getStyles from "../styles/ProductItem.style";
+import ROUTES from "../../../../utils/constants";
 
 const ProductItem = ({ product, theme }) => {
   const styles = getStyles(theme);
@@ -12,7 +13,7 @@ const ProductItem = ({ product, theme }) => {
       style={styles.container}
       onPress={() =>
         router.push({
-          pathname: "/screens/ProductDetailScreen/views/ProductDetailScreen",
+          pathname: ROUTES?.productDetails,
           params: {
             id: product?.id,
             title: product?.title,

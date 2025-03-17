@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import GoogleSignInButton from "../../../components/atoms/SignIn/GoogleSignInButton";
 import styles from "../styles/WelcomeScreen.style";
+import ROUTES from "../../../utils/constants";
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const WelcomeScreen = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/screens/HomeScreen/views/HomeScreen");
+      router.push(ROUTES?.home);
     }
   }, [user]);
 
@@ -58,7 +59,7 @@ const WelcomeScreen = () => {
       >
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/screens/HomeScreen/views/HomeScreen")}
+          onPress={() => router.push(ROUTES?.home)}
         >
           <Text style={styles.buttonText}>Continue as a Guest →</Text>
         </TouchableOpacity>

@@ -4,7 +4,7 @@ import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
-import signIn from "../../../auth/signIn";
+import SignIn from "../../../auth/SignIn";
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
 
@@ -25,7 +25,7 @@ const GoogleSignInButton = () => {
       <GoogleSigninButton
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
-        onPress={() => signIn(dispatch, router)}
+        onPress={() => SignIn(dispatch, router)}
       />
     </View>
   );
