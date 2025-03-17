@@ -1,21 +1,24 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../../utils/colors";
 
-const getStyles = (theme) =>
-  StyleSheet.create({
+const getStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
+  return StyleSheet.create({
     container: {
       padding: 10,
       marginBottom: 12,
-      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      backgroundColor: colors?.backgroundColorProduct,
       borderRadius: 10,
       borderWidth: 1,
-      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderColor: colors?.borderColorProduct,
       width: "48%",
     },
     imageContainer: {
       height: 150,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: theme === "dark" ? "#333333" : "#F5EFE7",
+      backgroundColor: colors?.imageBackground,
       borderRadius: 10,
       marginBottom: 10,
       overflow: "hidden",
@@ -25,24 +28,25 @@ const getStyles = (theme) =>
       height: "100%",
     },
     imageAlt: {
-      color: theme === "dark" ? "#DDDDDD" : "#8B5E3C",
+      color: colors?.imageAltBackground,
     },
     title: {
       fontSize: 14,
       fontWeight: "bold",
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       height: 50,
     },
     price: {
       fontSize: 14,
-      color: theme === "dark" ? "#FF6347" : "#800000",
+      color: colors?.priceColor,
       marginBottom: 10,
       fontWeight: "bold",
     },
     category: {
       fontSize: 12,
-      color: theme === "dark" ? "#AAAAAA" : "#A9A9A9",
+      color: colors?.categoryColor,
     },
   });
+};
 
 export default getStyles;

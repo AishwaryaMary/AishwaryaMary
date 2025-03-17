@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../../utils/colors";
 
 const getHeaderStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
   return StyleSheet.create({
     header: {
       flexDirection: "row",
@@ -16,13 +19,13 @@ const getHeaderStyles = (theme) => {
     toggleLabel: {
       fontSize: 16,
       marginRight: 10,
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
     },
     dropdown: {
       position: "absolute",
       top: 50,
       right: 15,
-      backgroundColor: theme === "dark" ? "#333333" : "#FFFFFF",
+      backgroundColor: colors?.imageBackground,
       borderRadius: 5,
       padding: 10,
       shadowColor: "#000",
@@ -32,14 +35,14 @@ const getHeaderStyles = (theme) => {
       zIndex: 1000,
     },
     dropdownText: {
-      color: theme === "dark" ? "#FFFFFF" : "#333333",
+      color: colors?.dropdownText,
     },
     dropdownActionText: {
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       fontWeight: "bold",
     },
     userName: {
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
     },
     userNameContainer: {
       flexDirection: "column",

@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../utils/colors";
 
-const getStyles = (theme) =>
-  StyleSheet.create({
+const getStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
+  return StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: 60,
-      backgroundColor: theme === "dark" ? "#121212" : "#F5EFE7",
+      backgroundColor: colors?.background,
       paddingHorizontal: 16,
     },
     header: {
@@ -21,7 +24,7 @@ const getStyles = (theme) =>
     },
     toggleLabel: {
       fontSize: 16,
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       marginRight: 10,
       fontWeight: "500",
     },
@@ -29,7 +32,7 @@ const getStyles = (theme) =>
       position: "absolute",
       top: 40,
       right: 0,
-      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      backgroundColor: colors?.backgroundColorProduct,
       padding: 8,
       borderRadius: 8,
       shadowColor: "#000",
@@ -39,7 +42,7 @@ const getStyles = (theme) =>
     },
     dropdownText: {
       fontSize: 14,
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
     },
     dropdownActionText: {
       fontSize: 16,
@@ -56,7 +59,7 @@ const getStyles = (theme) =>
     noResultsText: {
       textAlign: "center",
       fontSize: 18,
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       marginTop: 20,
     },
     errorText: {
@@ -74,4 +77,6 @@ const getStyles = (theme) =>
       width: 100,
     },
   });
+};
+
 export default getStyles;

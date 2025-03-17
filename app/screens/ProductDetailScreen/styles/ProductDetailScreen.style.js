@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../utils/colors";
 
-const getStyles = (theme) =>
-  StyleSheet.create({
+const getStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
+  return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme === "dark" ? "#121212" : "#F5EFE7",
+      backgroundColor: colors?.background,
       paddingTop: "15%",
     },
     productInfoContainer: {
@@ -23,5 +26,6 @@ const getStyles = (theme) =>
       backgroundColor: "transparent",
     },
   });
+};
 
 export default getStyles;

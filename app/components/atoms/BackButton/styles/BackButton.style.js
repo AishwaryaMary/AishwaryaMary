@@ -1,7 +1,10 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../../utils/colors";
 
-const getBackButtonStyles = (theme) =>
-  StyleSheet.create({
+const getBackButtonStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
+  return StyleSheet.create({
     backButton: {
       padding: 10,
       marginLeft: 10,
@@ -10,10 +13,11 @@ const getBackButtonStyles = (theme) =>
       alignItems: "center",
     },
     backText: {
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       fontSize: 16,
       fontWeight: "bold",
     },
   });
+};
 
 export default getBackButtonStyles;

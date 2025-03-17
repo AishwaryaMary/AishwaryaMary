@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import SignIn from "../../../../auth/SignIn";
 import getHeaderStyles from "../styles/Header.style";
+import COLORS from "../../../../utils/colors";
 
 const Header = ({
   cyderesMode,
@@ -16,6 +17,7 @@ const Header = ({
   router,
 }) => {
   const styles = getHeaderStyles(theme);
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
 
   return (
     <View style={styles.header}>
@@ -36,7 +38,7 @@ const Header = ({
             <MaterialIcons
               name="account-circle"
               size={32}
-              color={theme === "dark" ? "#FFFFFF" : "#8B5E3C"}
+              color={colors?.text}
             />
           </TouchableOpacity>
         </View>

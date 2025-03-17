@@ -1,0 +1,36 @@
+const COLORS = {
+  dark: {
+    background: "#121212",
+    text: "#FFFFFF",
+    accent: "#8B5E3C",
+    pillBackground: "#1F1F1F",
+    pillBorder: "red",
+    pillSelectedBackground: "#333333",
+    backgroundColorProduct: "#1F1F1F",
+    borderColorProduct: "red",
+    imageBackground: "#333333",
+    imageAltBackground: "#DDDDDD",
+    priceColor: "#FF6347",
+    categoryColor: "#AAAAAA",
+    dropdownText: "#FFFFFF",
+    descriptionComponent: "#DDDDDD",
+  },
+  light: {
+    background: "#F5EFE7",
+    text: "#8B5E3C",
+    accent: "#8B5E3C",
+    pillBackground: "#FAF3E0",
+    pillBorder: "#D2B48C",
+    pillSelectedBackground: "#D2B48C",
+    backgroundColorProduct: "#FFFFFF",
+    borderColorProduct: "#D2B48C",
+    imageBackground: "#F5EFE7",
+    imageAltBackground: "#8B5E3C",
+    priceColor: "#800000",
+    categoryColor: "#A9A9A9",
+    dropdownText: "#333333",
+    descriptionComponent: "#6E4B27",
+  },
+};
+
+export default COLORS;

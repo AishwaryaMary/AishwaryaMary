@@ -1,7 +1,10 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../../../utils/colors";
 
-const getRelatedProductsStyles = (theme) =>
-  StyleSheet.create({
+const getRelatedProductsStyles = (theme) => {
+  const colors = theme === "dark" ? COLORS.dark : COLORS.light;
+
+  return StyleSheet.create({
     relatedProductsContainer: {
       marginTop: 10,
       paddingLeft: 16,
@@ -9,13 +12,13 @@ const getRelatedProductsStyles = (theme) =>
     relatedTitle: {
       fontSize: 20,
       fontWeight: "bold",
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       marginBottom: 12,
     },
     relatedItem: {
       width: 150,
       marginRight: 10,
-      backgroundColor: theme === "dark" ? "#1F1F1F" : "#FFFFFF",
+      backgroundColor: colors?.backgroundColorProduct,
       borderRadius: 8,
       padding: 8,
       shadowColor: "#000",
@@ -23,7 +26,7 @@ const getRelatedProductsStyles = (theme) =>
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
-      borderColor: theme === "dark" ? "red" : "#D2B48C",
+      borderColor: colors?.borderColorProduct,
       borderWidth: 1,
     },
     relatedImage: {
@@ -35,14 +38,15 @@ const getRelatedProductsStyles = (theme) =>
     relatedText: {
       fontSize: 14,
       fontWeight: "500",
-      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+      color: colors?.text,
       height: 40,
     },
     relatedPrice: {
       fontSize: 14,
-      color: theme === "dark" ? "#FF6347" : "#800000",
+      color: colors?.priceColor,
       fontWeight: "bold",
     },
   });
+};
 
 export default getRelatedProductsStyles;
