@@ -27,9 +27,12 @@ const CACHE_KEY_CATEGORIES = "cached_categories";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { products, loading, error, categories, user, theme } = useSelector(
-    (state) => state
-  );
+  const products = useSelector((state) => state.products);
+  const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
+  const categories = useSelector((state) => state.categories);
+  const user = useSelector((state) => state.user);
+  const theme = useSelector((state) => state.theme);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -61,7 +64,7 @@ const HomeScreen = () => {
         dispatch(fetchProductsSuccess(productsResponse?.data));
         dispatch(
           fetchCategoriesSuccess(
-            categoriesResponse?.data.map((cat) => cat.name)
+            categoriesResponse?.data.map((cat) => ca?.name)
           )
         );
 
@@ -71,11 +74,11 @@ const HomeScreen = () => {
         );
         await AsyncStorage.setItem(
           CACHE_KEY_CATEGORIES,
-          JSON.stringify(categoriesResponse?.data.map((cat) => cat.name))
+          JSON.stringify(categoriesResponse?.data.map((cat) => cat?.name))
         );
       } catch (err) {
-        dispatch(fetchProductsFailure(err.message));
-        dispatch(fetchCategoriesFailure(err.message));
+        dispatch(fetchProductsFailure(err?.message));
+        dispatch(fetchCategoriesFailure(err?.message));
       }
     };
 
@@ -84,7 +87,9 @@ const HomeScreen = () => {
 
   const filteredProducts = products?.filter(
     (product) =>
-      (selectedCategory ? product.category.name === selectedCategory : true) &&
+      (selectedCategory
+        ? product?.category?.name === selectedCategory
+        : true) &&
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -113,7 +118,7 @@ const HomeScreen = () => {
               ? require("../../../../assets/images/logo_dark.png")
               : require("../../../../assets/images/logo_light.png")
           }
-          style={[styles.logo]}
+          style={styles.logo}
           resizeMode="contain"
         />
       </View>

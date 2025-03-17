@@ -10,20 +10,22 @@ import RelatedProducts from "../../../components/molecules/RelatedProductsList/v
 
 const ProductDetailScreen = () => {
   const params = useLocalSearchParams();
-  const { products, theme } = useSelector((state) => state);
+  const products = useSelector((state) => state.products);
+  const theme = useSelector((state) => state.theme);
 
   const product = {
-    id: params.id,
-    title: params.title,
-    price: params.price,
-    description: params.description,
-    category: params.category,
-    images: params.images ? JSON.parse(params?.images) : [],
+    id: params?.id,
+    title: params?.title,
+    price: params?.price,
+    description: params?.description,
+    category: params?.category,
+    images: params?.images ? JSON.parse(params?.images) : [],
   };
 
   const relatedProducts = products?.filter(
     (item) =>
-      item.category.name === product.category && item.id !== Number(product.id)
+      item?.category?.name === product?.category &&
+      item?.id !== Number(product?.id)
   );
 
   const styles = getStyles(theme);
@@ -32,11 +34,11 @@ const ProductDetailScreen = () => {
     <ScrollView style={styles.container}>
       <View style={styles.productInfoContainer}>
         <BackButton theme={theme} />
-        <ImageCarousel images={product.images} />
+        <ImageCarousel images={product?.images} />
         <ProductDetails
-          title={product.title}
-          price={product.price}
-          description={product.description}
+          title={product?.title}
+          price={product?.price}
+          description={product?.description}
           theme={theme}
         />
       </View>

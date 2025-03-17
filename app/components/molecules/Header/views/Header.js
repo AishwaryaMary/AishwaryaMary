@@ -30,22 +30,27 @@ const Header = ({
           thumbColor={cyderesMode ? "#FFFFFF" : "#8B5E3C"}
         />
       </View>
-
-      <TouchableOpacity onPress={() => setShowDropdown(!showDropdown)}>
-        <MaterialIcons
-          name="account-circle"
-          size={32}
-          color={theme === "dark" ? "#FFFFFF" : "#8B5E3C"}
-        />
-      </TouchableOpacity>
+      <View style={styles.userNameContainer}>
+        <View>
+          <TouchableOpacity onPress={() => setShowDropdown(!showDropdown)}>
+            <MaterialIcons
+              name="account-circle"
+              size={32}
+              color={theme === "dark" ? "#FFFFFF" : "#8B5E3C"}
+            />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text style={styles.userName}>
+            {user?.data?.user?.name ?? "Guest"}
+          </Text>
+        </View>
+      </View>
 
       {showDropdown && (
         <View style={styles.dropdown}>
           {user?.data?.user?.name ? (
             <>
-              <Text style={styles.dropdownText}>
-                Logged in as {user?.data?.user?.name}
-              </Text>
               <TouchableOpacity onPress={handleLogout}>
                 <Text style={styles.dropdownActionText}>Log out</Text>
               </TouchableOpacity>

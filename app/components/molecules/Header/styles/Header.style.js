@@ -33,11 +33,17 @@ const getHeaderStyles = (theme) => {
     },
     dropdownText: {
       color: theme === "dark" ? "#FFFFFF" : "#333333",
-      marginBottom: 10,
     },
     dropdownActionText: {
       color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
       fontWeight: "bold",
+    },
+    userName: {
+      color: theme === "dark" ? "#FFFFFF" : "#8B5E3C",
+    },
+    userNameContainer: {
+      flexDirection: "column",
+      alignItems: "flex-end",
     },
   });
 };

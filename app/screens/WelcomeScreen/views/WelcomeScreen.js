@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
-import { View, Text, TouchableOpacity, Animated, Image } from "react-native";
+import { View, Text, TouchableOpacity, Animated } from "react-native";
 import GoogleSignInButton from "../../../components/atoms/SignIn/GoogleSignInButton";
 import styles from "../styles/WelcomeScreen.style";
 
@@ -36,7 +36,7 @@ const WelcomeScreen = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/screens/HomeScreen");
+      router.push("/screens/HomeScreen/views/HomeScreen");
     }
   }, [user]);
 

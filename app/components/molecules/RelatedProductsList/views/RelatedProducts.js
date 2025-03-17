@@ -14,7 +14,7 @@ const RelatedProducts = ({ relatedProducts, theme }) => {
       <FlatList
         data={relatedProducts}
         horizontal
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item?.id.toString()}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -24,23 +24,23 @@ const RelatedProducts = ({ relatedProducts, theme }) => {
                 pathname:
                   "/screens/ProductDetailScreen/views/ProductDetailScreen",
                 params: {
-                  id: item.id,
-                  title: item.title,
-                  price: item.price,
-                  description: item.description,
-                  category: item.category?.name,
-                  images: JSON.stringify(item.images),
+                  id: item?.id,
+                  title: item?.title,
+                  price: item?.price,
+                  description: item?.description,
+                  category: item?.category?.name,
+                  images: JSON.stringify(item?.images),
                 },
               })
             }
           >
             <Image
-              source={{ uri: item.images[0] }}
+              source={{ uri: item?.images?.[0] }}
               style={styles.relatedImage}
             />
-            <Text style={styles.relatedText}>{item.title}</Text>
+            <Text style={styles.relatedText}>{item?.title}</Text>
             <Text style={styles.relatedPrice}>
-              {formatPrice(Number(item.price))}
+              {formatPrice(Number(item?.price))}
             </Text>
           </TouchableOpacity>
         )}
