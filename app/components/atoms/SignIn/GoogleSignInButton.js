@@ -6,7 +6,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
 import AuthConfig from "../../../auth/AuthConfig";
-import SignIn from "../../../auth/SignIn";
+import SignInAuth from "../../../auth/SignInAuth";
 
 GoogleSignin.configure({
   webClientId: AuthConfig?.CLIENT_ID_WEB,
@@ -25,7 +25,7 @@ const GoogleSignInButton = () => {
       <GoogleSigninButton
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
-        onPress={() => SignIn(dispatch, router)}
+        onPress={() => SignInAuth(dispatch, router)}
       />
     </View>
   );

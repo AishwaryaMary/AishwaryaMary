@@ -6,12 +6,10 @@ import {
 import { setUser } from "../redux/actions";
 import ROUTES from "../utils/constants";
 
-const SignIn = async (dispatch, router) => {
+const SignInAuth = async (dispatch, router) => {
   try {
     await GoogleSignin.hasPlayServices();
-
     const userInfo = await GoogleSignin.signIn();
-
     if (!userInfo) {
       Alert.alert("Error", "Failed to retrieve user information.");
       return;
@@ -36,4 +34,4 @@ const SignIn = async (dispatch, router) => {
   }
 };
 
-export default SignIn;
+export default SignInAuth;

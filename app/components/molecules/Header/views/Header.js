@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import SignIn from "../../../../auth/SignIn";
+import SignInAuth from "../../../../auth/SignInAuth";
 import getHeaderStyles from "../styles/Header.style";
 import COLORS from "../../../../utils/colors";
 
@@ -58,7 +58,7 @@ const Header = ({
               </TouchableOpacity>
             </>
           ) : (
-            <TouchableOpacity onPress={() => SignIn(dispatch, router)}>
+            <TouchableOpacity onPress={() => SignInAuth(dispatch, router)}>
               <Text style={styles.dropdownActionText}>Sign in with Google</Text>
             </TouchableOpacity>
           )}
