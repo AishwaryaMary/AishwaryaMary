@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar renders correctly 1`] = `
+<TextInput
+  onChangeText={[MockFunction]}
+  placeholder="Search products..."
+  style={
+    {
+      "backgroundColor": "#FFFFFF",
+      "borderColor": "#D2B48C",
+      "borderRadius": 8,
+      "borderWidth": 1,
+      "height": 40,
+      "marginBottom": 12,
+      "paddingHorizontal": 10,
+    }
+  }
+  value="Sample"
+/>
+`;

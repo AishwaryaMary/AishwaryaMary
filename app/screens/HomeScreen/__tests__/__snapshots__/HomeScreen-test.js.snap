@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders correctly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#F5EFE7",
+      "flex": 1,
+      "paddingHorizontal": 16,
+      "paddingTop": 60,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Image
+      resizeMode="contain"
+      source={
+        {
+          "testUri": "../../../assets/images/logo_light.png",
+        }
+      }
+      style={
+        {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </View>
+  <Header
+    cyderesMode={false}
+    dispatch={[MockFunction]}
+    handleLogout={[Function]}
+    handleToggleTheme={[Function]}
+    router={
+      {
+        "push": [MockFunction],
+      }
+    }
+    setShowDropdown={[Function]}
+    showDropdown={false}
+    theme="light"
+    user={
+      {
+        "name": "John Doe",
+      }
+    }
+  />
+  <SearchBar
+    searchTerm=""
+    setSearchTerm={[Function]}
+    theme="light"
+  />
+  <CategoryList
+    categories={
+      [
+        "Category 1",
+        "Category 2",
+      ]
+    }
+    selectedCategory={null}
+    setSelectedCategory={[Function]}
+    theme="light"
+  />
+  <ProductList
+    error={null}
+    filteredProducts={
+      [
+        {
+          "category": {
+            "name": "Category 1",
+          },
+          "id": 1,
+          "title": "Test Product",
+        },
+      ]
+    }
+    loading={false}
+    theme="light"
+  />
+</View>
+`;

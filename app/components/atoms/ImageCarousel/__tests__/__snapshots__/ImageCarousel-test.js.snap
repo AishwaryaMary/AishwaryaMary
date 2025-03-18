@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageCarousel renders correctly with images 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "none",
+      "borderRadius": 12,
+      "elevation": 5,
+      "marginBottom": 20,
+      "overflow": "hidden",
+      "paddingHorizontal": "3%",
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 4,
+        "width": 0,
+      },
+      "shadowOpacity": 0.1,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <RCTScrollView
+    horizontal={true}
+    showsHorizontalScrollIndicator={false}
+  >
+    <View>
+      <View>
+        <Image
+          onError={[Function]}
+          source={
+            {
+              "uri": "https://example.com/image1.jpg",
+            }
+          }
+          style={
+            {
+              "borderRadius": 8,
+              "height": 200,
+              "marginRight": 10,
+              "width": 300,
+            }
+          }
+        />
+      </View>
+      <View>
+        <Image
+          onError={[Function]}
+          source={
+            {
+              "uri": "https://example.com/image2.jpg",
+            }
+          }
+          style={
+            {
+              "borderRadius": 8,
+              "height": 200,
+              "marginRight": 10,
+              "width": 300,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

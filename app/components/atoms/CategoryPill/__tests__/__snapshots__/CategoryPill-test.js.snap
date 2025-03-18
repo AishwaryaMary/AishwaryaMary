@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryPill renders correctly when not selected 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#FAF3E0",
+      "borderColor": "#D2B48C",
+      "borderRadius": 20,
+      "borderWidth": 1,
+      "height": 40,
+      "justifyContent": "center",
+      "marginRight": 8,
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#8B5E3C",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "padding": 12,
+      }
+    }
+  >
+    Test Category
+  </Text>
+</View>
+`;
+
+exports[`CategoryPill renders correctly when selected 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#D2B48C",
+      "borderColor": "#D2B48C",
+      "borderRadius": 20,
+      "borderWidth": 1,
+      "height": 40,
+      "justifyContent": "center",
+      "marginRight": 8,
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#8B5E3C",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "padding": 12,
+      }
+    }
+  >
+    Test Category
+  </Text>
+</View>
+`;

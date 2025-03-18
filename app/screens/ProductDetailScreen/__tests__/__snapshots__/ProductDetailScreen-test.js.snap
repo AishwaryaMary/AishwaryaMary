@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductDetailScreen renders correctly 1`] = `
+<RCTScrollView
+  removeClippedSubviews={true}
+  showsVerticalScrollIndicator={false}
+  style={
+    {
+      "backgroundColor": "#F5EFE7",
+      "flex": 1,
+      "paddingTop": "15%",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        {
+          "height": 550,
+        }
+      }
+    >
+      <BackButton
+        theme="light"
+      />
+      <ImageCarousel
+        images={
+          [
+            "https://test-image.com/image1.jpg",
+          ]
+        }
+        theme="light"
+      />
+      <ProductDetails
+        description="Test Description"
+        price="100"
+        theme="light"
+        title="Test Product"
+      />
+    </View>
+    <RelatedProducts
+      relatedProducts={
+        [
+          {
+            "category": {
+              "name": "Category 1",
+            },
+            "id": 2,
+            "title": "Related Product",
+          },
+        ]
+      }
+      theme="light"
+    />
+  </View>
+</RCTScrollView>
+`;

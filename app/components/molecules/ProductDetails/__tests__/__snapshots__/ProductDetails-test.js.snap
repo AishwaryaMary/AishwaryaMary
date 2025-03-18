@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductDetails renders correctly with default props 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#FFFFFF",
+      "borderColor": "#D2B48C",
+      "borderRadius": 12,
+      "borderWidth": 1,
+      "elevation": 5,
+      "marginBottom": 20,
+      "marginHorizontal": 16,
+      "padding": 16,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 4,
+        "width": 0,
+      },
+      "shadowOpacity": 0.1,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#8B5E3C",
+          "fontSize": 20,
+          "fontWeight": "600",
+          "marginBottom": 8,
+          "width": "80%",
+        }
+      }
+    >
+      Test Product
+    </Text>
+    <Text
+      style={
+        {
+          "color": "#800000",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "marginBottom": 12,
+          "textAlign": "center",
+        }
+      }
+    >
+      $100.00
+    </Text>
+  </View>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={7}
+    style={
+      {
+        "color": "#6E4B27",
+        "fontSize": 12,
+        "lineHeight": 24,
+      }
+    }
+  >
+    This is a test product description.
+  </Text>
+</View>
+`;
