@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router } from "expo-router";
 import formatPrice from "../../../../utils/formatPrice";
@@ -11,17 +11,9 @@ const ProductItem = ({ product, theme }) => {
 
   const styles = getStyles(theme);
 
-  useEffect(() => {
-    if (images?.[0]) {
-      Image.getSize(
-        images[0],
-        () => setIsValidImage(true),
-        () => setIsValidImage(false)
-      );
-    } else {
-      setIsValidImage(false);
-    }
-  }, [images?.[0]]);
+  const handleImageError = () => {
+    setIsValidImage(false);
+  };
 
   const handlePress = () => {
     router.push({
@@ -45,12 +37,15 @@ const ProductItem = ({ product, theme }) => {
             source={{ uri: images?.[0] }}
             style={styles.image}
             resizeMode="cover"
+            onError={handleImageError}
           />
         ) : (
           <Text style={styles.imageAlt}>Image Not Available</Text>
         )}
       </View>
-      <Text style={styles.title}>{title || "No title"}</Text>
+      <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+        {title || "No title"}
+      </Text>
       <Text style={styles.price}>
         {price ? formatPrice(price) : "No price available"}
       </Text>

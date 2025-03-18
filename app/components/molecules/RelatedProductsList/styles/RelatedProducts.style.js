@@ -46,6 +46,19 @@ const getRelatedProductsStyles = (theme) => {
       color: colors?.priceColor,
       fontWeight: "bold",
     },
+    imageAlt: {
+      color: colors?.imageAltBackground,
+      fontSize: 12,
+    },
+    relatedItemAlt: {
+      width: "100%",
+      height: 100,
+      borderRadius: 8,
+      marginBottom: 8,
+      backgroundColor: colors?.imageBackground,
+      justifyContent: "center",
+      alignItems: "center",
+    },
   });
 };
 

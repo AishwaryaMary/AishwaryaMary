@@ -38,7 +38,7 @@ const ProductDetailScreen = () => {
     >
       <View style={styles.productInfoContainer}>
         <BackButton theme={theme} />
-        <ImageCarousel images={product?.images} />
+        <ImageCarousel images={product?.images} theme={theme} />
         <ProductDetails
           title={product?.title}
           price={product?.price}

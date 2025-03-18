@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, FlatList, TouchableOpacity, Text, Image } from "react-native";
 import { useRouter } from "expo-router";
 import getRelatedProductsStyles from "../styles/RelatedProducts.style";
 import formatPrice from "../../../../utils/formatPrice";
-import ROUTES, { DEFAULT_IMAGE } from "../../../../utils/constants";
+import ROUTES from "../../../../utils/constants";
 
 const RelatedProducts = ({ relatedProducts = [], theme }) => {
   const router = useRouter();
   const styles = getRelatedProductsStyles(theme);
+  const [imageStatus, setImageStatus] = useState({});
 
   const handlePress = (item) => {
     router.push({
@@ -23,24 +24,46 @@ const RelatedProducts = ({ relatedProducts = [], theme }) => {
     });
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.relatedItem}
-      onPress={() => handlePress(item)}
-    >
-      <Image
-        source={{ uri: item?.images?.[0] || DEFAULT_IMAGE }}
-        style={styles.relatedImage}
-        resizeMode="cover"
-      />
-      <Text style={styles.relatedText} numberOfLines={1}>
-        {item?.title || "No Title"}
-      </Text>
-      <Text style={styles.relatedPrice}>
-        {item?.price ? formatPrice(Number(item?.price)) : "Price Unavailable"}
-      </Text>
-    </TouchableOpacity>
-  );
+  const handleImageError = (productId) => {
+    setImageStatus((prevStatus) => ({
+      ...prevStatus,
+      [productId]: false,
+    }));
+  };
+
+  const renderItem = ({ item }) => {
+    const productId = item?.id;
+    const isValidImage = imageStatus[productId] !== false;
+
+    return (
+      <TouchableOpacity
+        style={styles.relatedItem}
+        onPress={() => handlePress(item)}
+      >
+        {isValidImage ? (
+          <Image
+            source={{ uri: item?.images?.[0] }}
+            style={styles.relatedImage}
+            resizeMode="cover"
+            onError={() => handleImageError(productId)}
+          />
+        ) : (
+          <View style={styles.relatedItemAlt}>
+            <Text style={styles.imageAlt} numberOfLines={1}>
+              {"Image Not Available"}
+            </Text>
+          </View>
+        )}
+
+        <Text style={styles.relatedText} numberOfLines={1}>
+          {item?.title || "No Title"}
+        </Text>
+        <Text style={styles.relatedPrice}>
+          {item?.price ? formatPrice(Number(item?.price)) : "Price Unavailable"}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.relatedProductsContainer}>

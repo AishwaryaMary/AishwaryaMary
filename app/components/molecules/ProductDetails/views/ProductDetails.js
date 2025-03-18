@@ -17,7 +17,9 @@ const ProductDetails = ({
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.price}>{formatPrice(Number(price) || 0)}</Text>
       </View>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.description} numberOfLines={7} ellipsizeMode="tail">
+        {description}
+      </Text>
     </View>
   );
 };
